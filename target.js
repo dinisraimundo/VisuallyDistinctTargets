@@ -105,6 +105,7 @@ mapLetterToColor(letter) {
     let secondLetter = this.label.charAt(1); // Pode não existir
     let thirdLetter = this.label.charAt(2);
     let restOfWord = this.label.substring(2);
+    let twoLetters = '';
     
     // first part
     //let firstPart = this.label.substring(0,2);
@@ -133,11 +134,16 @@ mapLetterToColor(letter) {
     stroke(0);
     strokeWeight(3);
     
-    
-    if (last != firstLetter){
+    if (firstLast != firstLetter || secondLast != secondLetter){
       fill(color(255,255,255));
-      last = firstLetter;
-      text(firstLetter, startX + 20, this.y + 30);
+      
+      if (firstLast != firstLetter ){
+        firstLast = firstLetter;
+      }
+      secondLast = secondLetter;
+      twoLetters = firstLetter.concat(secondLetter);
+      
+      text(twoLetters, startX + 20, this.y + 30);
     }
     
     if (this.label.includes(" ")) {
@@ -146,10 +152,11 @@ mapLetterToColor(letter) {
       // Desenhar o restante da palavra (branco e menor)
       textSize(smallFont);
       fill('rgb(255,255,255)');
-    text(labelParts[0], startX, this.y + 50);
+      text(labelParts[0], startX, this.y + 50);
 
-    // Draw the second part at this.y + 90
-    text(labelParts[1], startX, this.y + 70);
+      // Draw the second part at this.y + 90
+      text(labelParts[1], startX, this.y + 70);
+      
     } else {
           strokeWeight(0);
         // Desenhar o restante da palavra (branco e menor)
@@ -169,6 +176,10 @@ mapLetterToColor(letter) {
   
   getFirstLetter() {
     return this.label.charAt(0);
+  }
+  
+  getSecondLetter() {
+    return this.label.charAt(1);
   }
   
 }

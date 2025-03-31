@@ -7,7 +7,7 @@
 //bananas
 
 // Database (CHANGE THESE!)
-const GROUP_NUMBER        = 13   // Add your group number here as an integer (e.g., 2, 3)
+const GROUP_NUMBER        = 12   // Add your group number here as an integer (e.g., 2, 3)
 const RECORD_TO_FIREBASE  = false;  // Set to 'true' to record user results to Firebase
 
 // Pixel density and setup variables (DO NOT CHANGE!)
@@ -33,7 +33,8 @@ let targets               = [];
 const GRID_ROWS           = 8;      // We divide our 80 targets in a 8x10 grid
 const GRID_COLUMNS        = 10;     // We divide our 80 targets in a 8x10 grid
 
-let last = "";
+let firstLast = "";
+let secondLast = "";
 
 // Ensures important data is loaded before the program starts
 function preload()
@@ -74,18 +75,23 @@ function draw()
     // Bool for drawing the letter
     let draw_letter = false;
     let letter = '';
+    let secondLetter = '';
     let colorChange = 0;
     
     // Draw all targets
 	for (var i = 0; i < legendas.getRowCount(); i++) {
       
       
-      if (letter != targets[i].getFirstLetter()) {
-          draw_letter = true;
+      if (letter != targets[i].getFirstLetter() || secondLetter != targets[i].getSecondLetter()) {
+        draw_letter = true;
+        secondLetter = targets[i].getSecondLetter();
+        
+        if (letter != targets[i].getFirstLetter()){
+          letter = targets[i].getFirstLetter();
           colorChange += 1;
+        }
+          
       }
-      
-      letter = targets[i].getFirstLetter();
       
       targets[i].draw(draw_letter, colorChange);
       draw_letter = false;
