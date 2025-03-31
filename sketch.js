@@ -6,8 +6,8 @@
 // p5.js reference: https://p5js.org/reference/
 
 // Database (CHANGE THESE!)
-const GROUP_NUMBER        = 18   // Add your group number here as an integer (e.g., 2, 3)
-const RECORD_TO_FIREBASE  = false;  // Set to 'true' to record user results to Firebase
+const GROUP_NUMBER        = 12   // Add your group number here as an integer (e.g., 2, 3)
+const RECORD_TO_FIREBASE  = true;  // Set to 'true' to record user results to Firebase
 
 // Pixel density and setup variables (DO NOT CHANGE!)
 let PPI, PPCM;
@@ -34,7 +34,8 @@ const GRID_COLUMNS        = 10;     // We divide our 80 targets in a 8x10 grid
 
 let firstLast = "";
 let secondLast = "";
-let last = ""
+let last = "";
+let som = new Audio("audio/ding-126626.mp3");
 
 // Ensures important data is loaded before the program starts
 function preload()
@@ -182,6 +183,7 @@ function mousePressed()
         // Checks if it was the correct target
         if (targets[i].id === trials[current_trial] + 1) 
         {
+          som.play();
           hits++;
         }
         else misses++;

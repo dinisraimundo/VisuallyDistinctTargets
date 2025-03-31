@@ -108,9 +108,9 @@ class Target {
     
     
     let letter = this.label.charAt(0)
-    print("last:", last, " now:", letter)
+
     if (last != letter){
-      print("IN --- last:", last, " now:", letter)
+      
       
       textFont("Arial", 40);
       fill(color(255,0,0));
@@ -144,6 +144,14 @@ class Target {
         textSize(smallFont);
         text(labelParts[0], startX, this.y + 50);
         text(labelParts[1], startX, this.y + 70);
+        if (labelParts.length > 2) {
+          let counter = 2;
+          if (labelParts[2] == "do") {
+            text(labelParts[2], startX + 95, this.y + 70);
+            counter++;
+          }
+          text(labelParts[counter], startX, this.y + 90);
+        }
       } else {
         strokeWeight(0);
         textSize(smallFont);
@@ -166,6 +174,7 @@ class Target {
         textSize(smallFont);
         text(labelParts[0], startX, this.y + 50);
         text(labelParts[1], startX, this.y + 70);
+        
       } else {
         strokeWeight(0);
         textSize(smallFont);
